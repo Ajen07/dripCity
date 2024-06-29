@@ -1,0 +1,32 @@
+services:
+  postgresDB:
+    container_name: postgresDB
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - "5433:5433"
+    environment:
+      - POSTGRES_USER=drip
+      - POSTGRES_PASSWORD=drip
+      - POSTGRES_DB=dripApp
+      - PGPORT=5433
+    volumes:
+      - pgdatadrip:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmindrip
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=dripApparels@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=drip5432
+    depends_on:
+      - postgresDB
+    ports:
+      - "4001:80"
+    volumes:
+      - pgadmin-data-drip:/var/lib/pgadmin
+
+volumes:
+  pgdatadrip:
+  pgadmin-data-drip:
