@@ -19,11 +19,10 @@ const ProductCard = ({ id, name, price }: ProductsProps) => {
   return (
     <Card className="w-[300px] lg:w-[350px] relative">
       <div className="flex right-6 top-6">
-        <ShoppingCart
-          className="text-purple-700 text-md absolute -right-4 -top-4  border hover:border-purple-600 hover:fill-purple-500 rounded-full p-2 cursor-pointer"
+        <Heart
           size={40}
+          className="text-purple-700 text-md absolute -right-4 -top-4  border hover:border-purple-600 hover:fill-purple-500 rounded-full p-2 cursor-pointer"
         />
-        <Heart size={40} className="text-purple-700 text-md absolute -left-4 -top-4  border hover:border-purple-600 hover:fill-purple-500 rounded-full p-2 cursor-pointer" />
       </div>
       <CardHeader>
         <Image
@@ -43,7 +42,9 @@ const ProductCard = ({ id, name, price }: ProductsProps) => {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">View</Button>
-        <Button variant="primary">Buy Now</Button>
+        <Button variant="primary" className="flex justify-center items-center">
+          <span>Add to Cart</span>
+        </Button>
       </CardFooter>
     </Card>
   );
