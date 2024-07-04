@@ -2,9 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import placeholder from "@/app/placeholder.svg";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -12,14 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import EmailInput from "@/components/auth/EmailInput";
 
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import { FcGoogle } from "react-icons/fc";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaDiscord } from "react-icons/fa6";
 import { SiDiscord } from "react-icons/si";
-import { connect } from "http2";
 
 export default function Register() {
   return (
@@ -34,35 +30,17 @@ export default function Register() {
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="first-name">First name</Label>
-                  <Input id="first-name" placeholder="Max" required />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="last-name">Last name</Label>
-                  <Input id="last-name" placeholder="Robinson" required />
-                </div>
-              </div>
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
+                <EmailInput isLogin={false} />
               </div>
-              <Button type="submit" className="w-full" variant="primary">
-                Create an account
-              </Button>
             </div>
             <p className="text-center">or</p>
             <div className="flex justify-center items-center gap-x-2">
               <div className="text-2xl bg-slate-100 py-2 px-4 rounded-md">
                 <RegisterLink
                   authUrlParams={{
-                    connection_id: "conn_01901ff58f7190166f0b1e2558896bd7",
+                    connection_id:
+                      process.env.NEXT_PUBLIC_KINDE_CONNECTION_GOOGLE || "",
                   }}
                 >
                   <FcGoogle />
@@ -71,7 +49,8 @@ export default function Register() {
               <div className="text-2xl bg-slate-100 py-2 px-4 rounded-md">
                 <RegisterLink
                   authUrlParams={{
-                    connection_id: "conn_01901ff58f723c55ac2957f8a130f8f9",
+                    connection_id:
+                      process.env.NEXT_PUBLIC_KINDE_CONNECTION_TWITTER || "",
                   }}
                 >
                   <FaXTwitter />
@@ -80,7 +59,8 @@ export default function Register() {
               <div className="text-2xl bg-slate-100 py-2 px-4 rounded-md ">
                 <RegisterLink
                   authUrlParams={{
-                    connection_id: "conn_01901ff58f7271c1ca5c7ea0f5533351",
+                    connection_id:
+                      process.env.NEXT_PUBLIC_KINDE_CONNECTION_DISCORD || "",
                   }}
                 >
                   <SiDiscord className="fill-[#5662f6]" />

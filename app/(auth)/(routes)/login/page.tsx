@@ -7,7 +7,7 @@ import {
 
 import { FcGoogle } from "react-icons/fc";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaDiscord } from "react-icons/fa6";
+import { SiDiscord } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,10 +20,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import placeholder from "@/app/placeholder.svg";
+import EmailInput from "@/components/auth/EmailInput";
 
 export default function Login() {
   return (
-    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+    <div className="w-full lg:grid lg:grid-cols-2 h-screen">
       <div className="flex items-center justify-center py-12 lg:order-last">
         <Card className="mx-auto max-w-sm">
           <CardHeader>
@@ -35,29 +36,8 @@ export default function Login() {
           <CardContent>
             <div className="grid gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
+                <EmailInput isLogin={true} />
               </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <Link
-                    href="#"
-                    className="ml-auto inline-block text-sm underline"
-                  >
-                    Forgot your password?
-                  </Link>
-                </div>
-                <Input id="password" type="password" required />
-              </div>
-              <Button type="submit" className="w-full" variant="primary">
-                Login
-              </Button>
             </div>
             <p className="text-center">or</p>
             <div className="flex justify-center items-center gap-x-2">
@@ -71,10 +51,24 @@ export default function Login() {
                 </LoginLink>
               </div>
               <div className="text-2xl bg-slate-100 py-2 px-4 rounded-md">
-                <FaXTwitter />
+                <RegisterLink
+                  authUrlParams={{
+                    connection_id:
+                      process.env.NEXT_PUBLIC_KINDE_CONNECTION_TWITTER || "",
+                  }}
+                >
+                  <FaXTwitter />
+                </RegisterLink>
               </div>
               <div className="text-2xl bg-slate-100 py-2 px-4 rounded-md">
-                <FaDiscord />
+                <RegisterLink
+                  authUrlParams={{
+                    connection_id:
+                      process.env.NEXT_PUBLIC_KINDE_CONNECTION_DISCORD || "",
+                  }}
+                >
+                  <SiDiscord className="fill-[#5662f6]" />
+                </RegisterLink>
               </div>
             </div>
             <div className="mt-4 text-center text-sm">
