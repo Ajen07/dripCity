@@ -16,3 +16,9 @@ export interface InputWithLabelProps {
   placeholder: string;
   required?: boolean;
 }
+
+export interface MenuItemProps {
+  title: string;
+  icon: React.ReactNode;
+  href: string;
+}
