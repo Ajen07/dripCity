@@ -10,7 +10,7 @@ const AdminSidebar = () => {
         <MdDashboard className="text-2xl" />
         <h1 className="font-extrabold text-xl pt-1 text-purple-600">Admin Dashboard</h1>
       </div>
-      <Separator className="h-[2px] bg-zinc-300 w-40 rounded-md mx-auto" />
+      <Separator className="h-[2px] bg-zinc-400 w-40 rounded-md mx-auto" />
       <NavigationItem />
     </div>
   );

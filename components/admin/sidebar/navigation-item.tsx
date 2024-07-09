@@ -1,10 +1,11 @@
 import React from "react";
 import { GrCatalogOption } from "react-icons/gr";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { FaRegUser } from "react-icons/fa";
+import { LuUser2 } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { IoHomeOutline } from "react-icons/io5";
+import { MdAttachMoney } from "react-icons/md";
 import MenuItem from "./menuItem/menu-item";
 
 const NavigationItem = () => {
@@ -12,7 +13,7 @@ const NavigationItem = () => {
     {
       title: "Overview",
       icon: <IoHomeOutline />,
-      href: "/",
+      href: "/dashboard",
     },
     {
       title: "Catalog",
@@ -25,8 +26,13 @@ const NavigationItem = () => {
       href: "/dashboard/orders",
     },
     {
+      title: "Transactions",
+      icon: <MdAttachMoney />,
+      href: "/dashboard/transactions",
+    },
+    {
       title: "Users",
-      icon: <FaRegUser />,
+      icon: <LuUser2 />,
       href: "/dashboard/users",
     },
     {

@@ -13,7 +13,7 @@ const MenuItem = ({ href, icon, title }: MenuItemProps) => {
       className={pathname === href ? "flex gap-x-4 w-full pl-5 py-2  group bg-white rounded-md text-purple-700" : "flex gap-x-4 hover:bg-white w-full pl-5 py-2 rounded-md hover:text-purple-700"}
     >
       <div className="self-start pt-1 text-xl">{icon}</div>
-      <p className="text-lg">{title}</p>
+      <p className="text-lg capitalize">{title}</p>
     </Link>
   );
 };

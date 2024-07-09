@@ -1,6 +1,6 @@
 services:
   postgresDB:
-    container_name: postgres
+    container_name: postgresDB
     image: postgres:15-alpine
     restart: always
     ports:
