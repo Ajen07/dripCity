@@ -14,11 +14,13 @@ import {
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  const pathname = usePathname();
+  const pathname: string = usePathname();
   return (
     <header
       className={
-        pathname === "/login" || pathname === "/register"
+        pathname === "/login" ||
+        pathname === "/register" ||
+        pathname.includes("/dashboard")
           ? "hidden"
           : "justify-between h-[4rem]  items-center px-4 sticky top-0 w-full bg-white text-black lg:flex z-10 border border-b-2"
       }

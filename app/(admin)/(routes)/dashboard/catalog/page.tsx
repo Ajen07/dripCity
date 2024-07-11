@@ -1,8 +1,7 @@
 import CatalogTabs from "@/components/admin/catalog/catalog-tabs";
 import SearchBar from "@/components/SearchBar";
-import { Button } from "@/components/ui/button";
-import { IoAddSharp } from "react-icons/io5";
 import React from "react";
+import AddProductButton from "@/components/admin/catalog/add-product-button";
 
 const Catalogue = () => {
   return (
@@ -13,10 +12,7 @@ const Catalogue = () => {
       <section className="mt-20 flex justify-between md:pr-16">
         <SearchBar />
         <div>
-          <Button variant="primary" className="flex justify-center items-center gap-x-3">
-            <IoAddSharp className="text-white text-lg" />
-            <span className="text-[1.1rem]"> Add Product</span>
-          </Button>
+          <AddProductButton />
         </div>
       </section>
       <section className="mt-4 py-4">

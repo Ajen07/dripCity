@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart } from "lucide-react";
 
 const ProductCard = ({ id, name, price }: ProductsProps) => {
   return (
