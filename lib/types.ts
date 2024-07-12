@@ -3,6 +3,36 @@ export interface ProductsProps {
   price: number;
   id: string;
 }
+export interface CatalogProductsProps {
+  name: string;
+  price: number;
+  id: string;
+  inventory: number;
+  category: string;
+  description: string;
+  isFeatured: boolean;
+  isActive: boolean;
+  isArchived: boolean;
+  imageUrls: ImageUrlProps[];
+}
+
+export interface CatalogProduct {
+  name: string;
+  price: number;
+  id: string;
+  inventory: number;
+  category: string;
+  description: string;
+  isFeatured: boolean;
+  isActive: boolean;
+  isArchived: boolean;
+  imageUrls: ImageUrlProps[];
+}
+
+export interface ImageUrlProps {
+  url: string;
+  type: string;
+}
 
 export interface RadioFilterProps {
   name: string;

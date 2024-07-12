@@ -12,13 +12,17 @@ const CatalogTabs = () => {
     const params = new URLSearchParams(searchParams);
     if (value && value !== "all") {
       params.set("activeTab", value);
-    }else{
+    } else {
       params.delete("activeTab");
     }
     replace(`${pathname}?${params.toString()}`);
   };
   return (
-    <Tabs defaultValue={searchParams.get('activeTab')?.toString()} className="w-fit" onValueChange={handleChange}>
+    <Tabs
+      defaultValue={searchParams.get("activeTab")?.toString() || "all"}
+      className="w-fit"
+      onValueChange={handleChange}
+    >
       <TabsList className=" h-[50px] w-[330px]">
         {catalogTabs.map((tab) => (
           <TabsTrigger

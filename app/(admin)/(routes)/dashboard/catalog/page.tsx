@@ -13,7 +13,7 @@ const Catalogue = ({
 }) => {
   const activeTab = searchParams?.activeTab || "all";
   return (
-    <main className="pt-8 pl-5">
+    <main className="py-8 pl-5">
       <h1 className="text-4xl font-extrabold text-purple-500 capitalize">
         Our Catalogue
       </h1>
@@ -26,7 +26,7 @@ const Catalogue = ({
       <section className="mt-4 py-4">
         <CatalogTabs />
       </section>
-      <section>
+      <section className="md:flex md:gap-x-8 flex-wrap">
         <Suspense key={activeTab} fallback={<div>Loading...</div>}>
           <CatalogProducts activeTab={activeTab} />
         </Suspense>
