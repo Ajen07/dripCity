@@ -19,6 +19,7 @@ CREATE TABLE "ProductImage" (
     "type" TEXT NOT NULL,
     "productId" UUID,
     "url" TEXT NOT NULL,
+    "inUse" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "ProductImage_pkey" PRIMARY KEY ("id")
 );

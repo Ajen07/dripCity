@@ -39,5 +39,6 @@ model ProductImage {
   type      String
   productId String?  @db.Uuid
   url       String
+  inUse     Boolean  @default(true)
   product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
 }
