@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { CreateProductFormValues } from "@/validations/product/create-product-validation";
+import { revalidatePath } from "next/cache";
 
 export const addProductAction = async (values: CreateProductFormValues) => {
   // TODO : authorization
@@ -49,6 +50,8 @@ export const addProductAction = async (values: CreateProductFormValues) => {
           })
         )
       );
+
+      revalidatePath("/dashboard/catalog");
 
       return { message: "Product created successfully", status: 201 };
     });
