@@ -35,10 +35,12 @@ model Product {
 }
 
 model ProductImage {
-  id        String   @id @default(uuid()) @db.Uuid
+  id        Int      @id @default(autoincrement())
   type      String
   productId String?  @db.Uuid
-  url       String
+  url       String   @db.Text
   inUse     Boolean  @default(true)
   product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@unique(fields: [productId, type, inUse], name: "uniqueProductImageKey")
 }

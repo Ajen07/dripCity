@@ -15,7 +15,7 @@ CREATE TABLE "Product" (
 
 -- CreateTable
 CREATE TABLE "ProductImage" (
-    "id" UUID NOT NULL,
+    "id" SERIAL NOT NULL,
     "type" TEXT NOT NULL,
     "productId" UUID,
     "url" TEXT NOT NULL,
@@ -23,6 +23,9 @@ CREATE TABLE "ProductImage" (
 
     CONSTRAINT "ProductImage_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ProductImage_productId_type_inUse_key" ON "ProductImage"("productId", "type", "inUse");
 
 -- AddForeignKey
 ALTER TABLE "ProductImage" ADD CONSTRAINT "ProductImage_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE SET NULL ON UPDATE CASCADE;
