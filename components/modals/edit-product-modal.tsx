@@ -39,8 +39,11 @@ export const EditProductModal = () => {
     resolver: zodResolver(editProductformSchema),
     defaultValues,
   });
-  const { isExecuting, executeAsync } = useAction(editProductAction);
+  const boundProductId = (values: editProductFormValues) =>
+    editProductAction(catalogProduct?.id, values);
+  const { isExecuting, executeAsync } = useAction(boundProductId);
   const handleClose = () => {
+    form.reset();
     onClose();
   };
 
@@ -51,10 +54,12 @@ export const EditProductModal = () => {
         toast.error(`${res.serverError.message}`, { duration: 3000 });
       }
       if (res?.validationErrors) {
+        console.log(res.validationErrors);
+
         toast.error(`${res.validationErrors}`, { duration: 3000 });
       }
       if (res?.data) {
-        toast.success("Product created successfully", { duration: 3000 });
+        toast.success("Product edited successfully", { duration: 3000 });
         form.reset();
         onClose();
       }

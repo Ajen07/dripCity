@@ -10,13 +10,15 @@ import {
   NotFoundError,
 } from "@/lib/error";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import * as z from "zod";
 
 export const editProductAction = actionClient
   .metadata({ actionName: "editProduct" })
   .schema(editProductformSchema)
-  .action(async ({ parsedInput }) => {
+  .bindArgsSchemas<[productId: z.ZodString]>([z.string().uuid()])
+  .action(async ({ parsedInput, bindArgsParsedInputs: [productId] }) => {
     // TODO : authorization
-    if (!parsedInput.id) {
+    if (!productId) {
       throw new BadRequestError("Product ID is required");
     }
 
@@ -54,57 +56,55 @@ export const editProductAction = actionClient
     }
     try {
       const product = await db.product.findUnique({
-        where: { id: parsedInput.id },
+        where: { id: productId },
       });
       if (!product) {
-        throw new NotFoundError(`Product with ID ${parsedInput.id} not found`);
+        throw new NotFoundError(`Product with ID ${productId} not found`);
       }
 
-      return db.$transaction(
-        async (tsx) => {
-          const product = await tsx.product.update({
-            where: { id: parsedInput.id },
-            data: {
-              name,
-              description,
-              price,
-              inventory,
-              category,
-              isActive,
-              isFeatured,
-              isArchived,
+      return db.$transaction(async (tsx) => {
+        const product = await tsx.product.update({
+          where: { id: parsedInput.id },
+          data: {
+            name,
+            description,
+            price,
+            inventory,
+            category,
+            isActive,
+            isFeatured,
+            isArchived,
+          },
+        });
+        // disable inuse for the images that are old
+        await tsx.productImage.updateMany({
+          where: {
+            productId: product.id,
+            type: {
+              in: imageUrls.map((imageUrl) => imageUrl.type),
             },
-          });
-          // disable inuse for the images that are old
-          await tsx.productImage.updateMany({
-            where: {
-              productId: product.id,
-              type: {
-                in: imageUrls.map((imageUrl) => imageUrl.type),
+          },
+          data: {
+            inUse: false,
+            productId: null,
+          },
+        });
+
+        await Promise.all(
+          imageUrls.map((imageUrl) =>
+            tsx.productImage.create({
+              data: {
+                type: imageUrl.type,
+                url: imageUrl.url,
+                productId: product.id,
               },
-            },
-            data: {
-              inUse: false,
-              productId: null,
-            },
-          });
+            })
+          )
+        );
 
-          await Promise.all(
-            imageUrls.map((imageUrl) =>
-              tsx.productImage.create({
-                data: {
-                  type: imageUrl.type,
-                  url: imageUrl.url,
-                  productId: product.id,
-                },
-              })
-            )
-          );
-
-          revalidatePath("/dashboard/catalog");
-          return { message: "Product updated successfully", status: 200 };
-        }
-      );
+        revalidatePath("/dashboard/catalog");
+        return { message: "Product updated successfully", status: 200 };
+      });
     } catch (error) {
       if (error instanceof NotFoundError) {
         throw error;
