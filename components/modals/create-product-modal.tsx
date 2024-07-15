@@ -31,6 +31,8 @@ import { FileUpload } from "../file-upload";
 import { toast } from "sonner";
 import { addProductAction } from "@/actions/create-product-action";
 
+import { useAction } from "next-safe-action/hooks";
+
 export const AddProductModal = () => {
   const { isOpen, onClose, type } = useModal();
   const isModalOpen = isOpen && type === "addProduct";
@@ -38,20 +40,23 @@ export const AddProductModal = () => {
     resolver: zodResolver(createProductformSchema),
     defaultValues,
   });
-  const isLoading = form.formState.isSubmitting;
+
   const handleClose = () => {
-    form.reset();
     onClose();
   };
-
+  const { isExecuting, executeAsync } = useAction(addProductAction);
   const onSubmit = async (values: CreateProductFormValues) => {
-    try {
-      await addProductAction(values);
+    const res = await executeAsync(values);
+    if (res?.serverError) {
+      toast.error(`${res.serverError.message}`, { duration: 3000 });
+    }
+    if (res?.validationErrors) {
+      toast.error(`${res.validationErrors}`, { duration: 3000 });
+    }
+    if (res?.data) {
       toast.success("Product created successfully", { duration: 3000 });
       form.reset();
       onClose();
-    } catch (error) {
-      toast.error("Failed to create product");
     }
   };
 
@@ -79,7 +84,7 @@ export const AddProductModal = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        disabled={isLoading}
+                        disabled={isExecuting}
                         className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black"
                         placeholder="Enter Product Name"
                         {...field}
@@ -99,7 +104,7 @@ export const AddProductModal = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        disabled={isLoading}
+                        disabled={isExecuting}
                         className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black"
                         placeholder="Enter Description"
                         {...field}
@@ -120,7 +125,7 @@ export const AddProductModal = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          disabled={isLoading}
+                          disabled={isExecuting}
                           className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black"
                           placeholder="Enter Price"
                           {...field}
@@ -140,7 +145,7 @@ export const AddProductModal = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          disabled={isLoading}
+                          disabled={isExecuting}
                           className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black"
                           placeholder="Enter Inventory"
                           {...field}
@@ -161,7 +166,7 @@ export const AddProductModal = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        disabled={isLoading}
+                        disabled={isExecuting}
                         className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black"
                         placeholder="Enter Category"
                         {...field}
@@ -307,7 +312,7 @@ export const AddProductModal = () => {
               />
             </div>
             <DialogFooter className="px-6 py-4">
-              <Button variant="primary" disabled={isLoading} type="submit">
+              <Button variant="primary" disabled={isExecuting} type="submit">
                 Create
               </Button>
             </DialogFooter>
