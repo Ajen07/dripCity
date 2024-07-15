@@ -1,10 +1,11 @@
 import { create } from "zustand";
 import { Product } from "@prisma/client";
+import { CatalogProduct } from "@/lib/types";
 
 export type ModalType = "addProduct" | "editProduct";
 
 interface ModalData {
-    product?: Product;
+    catalogProduct?: CatalogProduct;
 }
 
 interface ModalStore {

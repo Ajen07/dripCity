@@ -11,6 +11,7 @@ export const catalogProductSelect = {
     select: {
       url: true,
       type: true,
+      inUse: true,
     },
   },
 };
