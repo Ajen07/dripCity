@@ -7,6 +7,7 @@ export const createProductformSchema = z.object({
   inventory: z.coerce
     .number()
     .min(1, { message: "Items in inventory must be greater than 1" }),
+
   category: z.string().min(1, { message: "Category is required" }),
   isFeatured: z.boolean(),
   isArchived: z.boolean(),

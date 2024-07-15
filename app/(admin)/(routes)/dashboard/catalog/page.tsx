@@ -26,7 +26,7 @@ const Catalogue = ({
       <section className="mt-4 py-4">
         <CatalogTabs />
       </section>
-      <section className="md:flex md:gap-x-8 flex-wrap">
+      <section className="md:flex md:gap-x-16 md:gap-y-8 flex-wrap">
         <Suspense key={activeTab} fallback={<div>Loading...</div>}>
           <CatalogProducts activeTab={activeTab} />
         </Suspense>

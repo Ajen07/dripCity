@@ -44,7 +44,6 @@ export const actionClient = createSafeActionClient({
     }
   },
   handleServerErrorLog(originalError) {
-
     console.error(`${originalError.name}:`, originalError.message);
   },
   defineMetadataSchema: () => z.object({ actionName: z.string() }),

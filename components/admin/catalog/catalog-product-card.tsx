@@ -36,7 +36,7 @@ const CatalogProductCard = ({
     isArchived,
   };
   return (
-    <Card className="w-[300px] lg:w-[350px] relative hover:shadow-2xl transition-all">
+    <Card className="w-[300px] lg:w-[350px] relative hover:shadow-2xl hover:lg:w-[360px] transition-all">
       <CardHeader>
         <Image
           src={imageUrls[0].url}
@@ -46,22 +46,28 @@ const CatalogProductCard = ({
           height={1000}
           className="w-[300px] h-[375px]"
         />
-        <CardTitle className="text-[1.5rem] font-light">{name}</CardTitle>
+        <CardTitle className="text-[1.5rem] font-light h-[4rem]">
+          {name}
+        </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col">
         <div className="flex justify-between">
-          <p className="flex flex-col space-y-1.5 font-extrabold">Rs {price}</p>
+          <p className="flex flex-col space-y-1.5 font-extrabold text-lg">
+            Rs {price}
+          </p>
           <div>
-            {isFeatured ? (
-              <span className="bg-primary bg-green-100 text-green-500 px-2 py-1 rounded-full">
+            {isFeatured && isActive && (
+              <span className=" bg-green-100 text-green-500 border-2 border-green-500 px-2 py-1 rounded-full">
                 Featured
               </span>
-            ) : isActive ? (
+            )}
+            {isActive && !isFeatured && (
               <span className="bg-yellow-100 text-yellow-500 px-2 py-1 rounded-full border-2 border-yellow-400">
                 Active
               </span>
-            ) : (
-              <span className="bg-gray-500 px-2 py-1 rounded-full">
+            )}
+            {isArchived && (
+              <span className="bg-red-100 text-red-500 border-2 border-red-500 px-2 py-1 rounded-full">
                 Archived
               </span>
             )}
