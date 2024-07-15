@@ -10,7 +10,6 @@ import {
   NotFoundError,
 } from "@/lib/error";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { Prisma } from "@prisma/client";
 
 export const editProductAction = actionClient
   .metadata({ actionName: "editProduct" })
@@ -86,6 +85,7 @@ export const editProductAction = actionClient
             },
             data: {
               inUse: false,
+              productId: null,
             },
           });
 
