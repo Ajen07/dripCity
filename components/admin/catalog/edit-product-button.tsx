@@ -1,10 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
-import { CatalogProductsProps } from "@/lib/types";
+import { CatalogProductProps } from "@/lib/types";
 import React from "react";
 
-const EditProductButton = ({ product }: { product: CatalogProductsProps }) => {
+const EditProductButton = ({ product }: { product: CatalogProductProps }) => {
   const { onOpen } = useModal();
   return (
     <Button

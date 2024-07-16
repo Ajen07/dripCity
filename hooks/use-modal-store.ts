@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import { Product } from "@prisma/client";
-import { CatalogProduct } from "@/lib/types";
+import { ArchiveProductButtonProps, CatalogProduct } from "@/lib/types";
 
-export type ModalType = "addProduct" | "editProduct";
+export type ModalType = "addProduct" | "editProduct" | "archiveProduct";
 
 interface ModalData {
-    catalogProduct?: CatalogProduct;
+  catalogProduct?: CatalogProduct;
+  archiveProduct?: ArchiveProductButtonProps;
 }
 
 interface ModalStore {

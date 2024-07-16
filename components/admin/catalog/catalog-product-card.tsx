@@ -7,9 +7,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { CatalogProductsProps } from "@/lib/types";
+import { CatalogProductProps } from "@/lib/types";
 import React from "react";
 import EditProductButton from "./edit-product-button";
+import ArchiveProductButton from "./archive-product-button";
 
 const CatalogProductCard = ({
   name,
@@ -22,7 +23,7 @@ const CatalogProductCard = ({
   imageUrls,
   isActive,
   isArchived,
-}: CatalogProductsProps) => {
+}: CatalogProductProps) => {
   const singleProduct = {
     name,
     price,
@@ -79,7 +80,10 @@ const CatalogProductCard = ({
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">View</Button>
-        <Button variant="destructive">Archive</Button>
+        <ArchiveProductButton
+          productId={singleProduct.id}
+          productName={singleProduct.name}
+        />
         <EditProductButton product={singleProduct} />
       </CardFooter>
     </Card>

@@ -3,7 +3,7 @@ export interface ProductsProps {
   price: number;
   id: string;
 }
-export interface CatalogProductsProps {
+export interface CatalogProductProps {
   name: string;
   price: number;
   id: string;
@@ -14,6 +14,11 @@ export interface CatalogProductsProps {
   isActive: boolean;
   isArchived: boolean;
   imageUrls: ImageUrlProps[];
+}
+
+export interface ArchiveProductButtonProps {
+  productId: string;
+  productName: string;
 }
 
 export interface CatalogProduct {
