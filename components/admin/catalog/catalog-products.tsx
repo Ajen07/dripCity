@@ -5,7 +5,7 @@ const CatalogProducts = async ({ activeTab }: { activeTab: string }) => {
   const {
     data: { products: catalogProducts },
   } = await axios(
-    `http://localhost:3000/api/catalog/products?activeTab=${activeTab}`
+    `${process.env.API_URL}/api/catalog/products?activeTab=${activeTab}`
   );
 
   return (

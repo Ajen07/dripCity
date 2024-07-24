@@ -15,7 +15,7 @@ import {
 import Image from "next/image";
 import { Heart } from "lucide-react";
 
-const ProductCard = ({ name, price, image }: ProductsProps) => {
+const ProductCard = ({ name, price, image, id }: ProductsProps) => {
   return (
     <Card className="w-[300px] lg:w-[350px] relative hover:shadow-2xl hover:lg:w-[360px] transition-all">
       <div className="flex right-6 top-6">
