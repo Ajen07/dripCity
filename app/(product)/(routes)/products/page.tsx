@@ -1,10 +1,9 @@
 import SearchBar from "@/components/SearchBar";
 import FilterContainer from "@/components/filters/FilterContainer";
 import ProductContainer from "@/components/products/ProductContainer";
-import React from "react";
+import React, { Suspense } from "react";
 
 export default function AllProductsPage() {
-
   return (
     <>
       <section className="flex min-h-[calc(100vh-66px)]">
@@ -13,7 +12,9 @@ export default function AllProductsPage() {
         </article>
         <article className="grow pl-6 pt-[2rem]">
           <SearchBar />
-          <ProductContainer/>
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProductContainer />
+          </Suspense>
         </article>
       </section>
     </>

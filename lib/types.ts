@@ -1,7 +1,7 @@
 export interface ProductsProps {
   name: string;
   price: number;
-  id: string;
+  image: string;
 }
 export interface CatalogProductProps {
   name: string;

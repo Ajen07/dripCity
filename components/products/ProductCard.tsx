@@ -15,9 +15,9 @@ import {
 import Image from "next/image";
 import { Heart } from "lucide-react";
 
-const ProductCard = ({ id, name, price }: ProductsProps) => {
+const ProductCard = ({ name, price, image }: ProductsProps) => {
   return (
-    <Card className="w-[300px] lg:w-[350px] relative">
+    <Card className="w-[300px] lg:w-[350px] relative hover:shadow-2xl hover:lg:w-[360px] transition-all">
       <div className="flex right-6 top-6">
         <Heart
           size={40}
@@ -26,19 +26,21 @@ const ProductCard = ({ id, name, price }: ProductsProps) => {
       </div>
       <CardHeader>
         <Image
-          src={productImage}
+          src={image || productImage}
           alt="image"
           loading="lazy"
           width={1000}
           height={1000}
           className="w-[300px] h-[375px]"
         />
-        <CardTitle className="text-[1.5rem] font-light">{name}</CardTitle>
+        <CardTitle className="text-[1.5rem] font-light h-[4rem]">
+          {name}
+        </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="flex flex-col space-y-1.5 font-extrabold">
+      <CardContent className="flex flex-col">
+        <p className="flex flex-col space-y-1.5 font-extrabold text-lg">
           Rs {price}
-        </div>
+        </p>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">View</Button>

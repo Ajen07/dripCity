@@ -11,9 +11,9 @@ const ProductContainer = async () => {
       {products.map((product:any) => (
         <div key={product.id} className="hover:shadow-2xl transition-all w-fit">
           <ProductCard
-            id={product.id}
             price={product.price}
             name={product.name}
+            image={product.imageUrls[0].url}
           />
         </div>
       ))}

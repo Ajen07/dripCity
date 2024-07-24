@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
-import { NextRequest, NextResponse } from "next/server";
-export async function GET(req: NextRequest) {
+import {NextResponse } from "next/server";
+export async function GET() {
   try {
     const products = await db.product.findMany({
       select: {
